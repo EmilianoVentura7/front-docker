@@ -2,12 +2,15 @@ FROM node:20.15.0
 
 WORKDIR /app
 
-COPY package*.json ./
-
+# Copia los archivos del proyecto
+COPY package.json package-lock.json ./
 RUN npm install
 
+# Copia el resto del código
 COPY . .
 
-EXPOSE 3000
+# Expone el puerto en el que corre Vite
+EXPOSE 5173
 
-CMD ["npm", "run", "dev"] 
+# Comando para iniciar Vite en modo desarrollo
+CMD ["npm", "run", "dev", "--", "--host"]
